@@ -1,0 +1,212 @@
+[
+  {
+    "id": "pb_0001",
+    "hindi_text": "अपनी किताबें खोलो",
+    "santali_text": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱠᱷᱩᱞᱟᱹᱭ",
+    "audio_file": "audio/pb_0001.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0002",
+    "hindi_text": "अपनी किताबें बंद करो",
+    "santali_text": "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱵᱚᱸᱫᱽ ᱢᱮ",
+    "audio_file": "audio/pb_0002.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0003",
+    "hindi_text": "शांत रहो",
+    "santali_text": "ᱛᱷᱤᱨ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "audio_file": "audio/pb_0003.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0004",
+    "hindi_text": "अपनी जगह पर बैठो",
+    "santali_text": "ᱟᱢᱟᱜ ᱴᱷᱟᱶ ᱨᱮ ᱫᱩᱲᱩᱵ ᱢᱮ",
+    "audio_file": "audio/pb_0004.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0005",
+    "hindi_text": "खड़े हो जाओ",
+    "santali_text": "ᱵᱮᱨᱮᱫ ᱢᱮ",
+    "audio_file": "audio/pb_0005.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0006",
+    "hindi_text": "बोर्ड की तरफ देखो",
+    "santali_text": "ᱵᱚᱨᱰ ᱥᱮᱫ ᱠᱚᱭᱚᱜᱽ ᱢᱮ",
+    "audio_file": "audio/pb_0006.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0007",
+    "hindi_text": "ध्यान से सुनो",
+    "santali_text": "ᱫᱷᱭᱟᱱ ᱛᱮ ᱟᱸᱡᱚᱢ ᱢᱮ",
+    "audio_file": "audio/pb_0007.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0008",
+    "hindi_text": "क्या आपने होमवर्क किया?",
+    "santali_text": "ᱪᱮᱫ ᱟᱢ ᱦᱚᱢᱣᱟᱨᱠᱮᱢ ᱠᱟᱹᱢᱤ ᱠᱮᱫᱟ?",
+    "audio_file": "audio/pb_0008.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0009",
+    "hindi_text": "नमस्ते, आप कैसे हैं?",
+    "santali_text": "ᱡᱚᱦᱟᱨ, ᱟᱢ ᱪᱮᱫ ᱞᱮᱠᱟ ᱢᱮᱱᱟᱢᱟ?",
+    "audio_file": "audio/pb_0009.ogg",
+    "domain": "greeting"
+  },
+  {
+    "id": "pb_0010",
+    "hindi_text": "गुड मॉर्निंग बच्चों",
+    "santali_text": "ᱥᱮᱛᱟᱜ ᱡᱚᱦᱟᱨ ᱜᱤᱫᱽᱨᱟᱹ ᱠᱚ",
+    "audio_file": "audio/pb_0010.ogg",
+    "domain": "greeting"
+  },
+  {
+    "id": "pb_0011",
+    "hindi_text": "पेन से लिखो",
+    "santali_text": "ᱠᱚᱞᱚᱢ ᱛᱮ ᱚᱞ ᱢᱮ",
+    "audio_file": "audio/pb_0011.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0012",
+    "hindi_text": "यह पढ़ो",
+    "santali_text": "ᱱᱚᱣᱟ ᱯᱟᱲᱦᱟᱣ ᱢᱮ",
+    "audio_file": "audio/pb_0012.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0013",
+    "hindi_text": "प्रश्न पूछो",
+    "santali_text": "ᱠᱩᱠᱞᱤ ᱠᱩᱞᱤ ᱢᱮ",
+    "audio_file": "audio/pb_0013.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0014",
+    "hindi_text": "उत्तर लिखो",
+    "santali_text": "ᱛᱮᱞᱟ ᱚᱞ ᱢᱮ",
+    "audio_file": "audio/pb_0014.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0015",
+    "hindi_text": "बहुत बढ़िया",
+    "santali_text": "ᱟᱹᱰᱤ ᱵᱮᱥ",
+    "audio_file": "audio/pb_0015.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0016",
+    "hindi_text": "क्या आपको समझ आया?",
+    "santali_text": "ᱪᱮᱫ ᱟᱢᱮᱢ ᱵᱩᱡᱷᱟᱹᱣ ᱠᱮᱫᱟ?",
+    "audio_file": "audio/pb_0016.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0017",
+    "hindi_text": "मुझे समझ नहीं आया",
+    "santali_text": "ᱤᱧ ᱵᱟᱹᱧ ᱵᱩᱡᱷᱟᱹᱣ ᱞᱮᱫᱟ",
+    "audio_file": "audio/pb_0017.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0018",
+    "hindi_text": "कृपया दोहराएं",
+    "santali_text": "ᱫᱚᱦᱲᱟ ᱞᱟᱹᱭ ᱢᱮ",
+    "audio_file": "audio/pb_0018.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0019",
+    "hindi_text": "अपनी कॉपी खोलो",
+    "santali_text": "ᱟᱢᱟᱜ ᱠᱚᱯᱤ ᱠᱷᱩᱞᱟᱹᱭ ᱢᱮ",
+    "audio_file": "audio/pb_0019.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0020",
+    "hindi_text": "सब लोग एक साथ बोलो",
+    "santali_text": "ᱡᱚᱛᱚ ᱦᱚᱲ ᱢᱤᱫ ᱛᱮ ᱞᱟᱹᱭ ᱯᱮ",
+    "audio_file": "audio/pb_0020.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0021",
+    "hindi_text": "कल फिर मिलेंगे",
+    "santali_text": "ᱜᱟᱯᱟ ᱵᱚᱱ ᱧᱟᱯᱟᱢᱟ",
+    "audio_file": "audio/pb_0021.ogg",
+    "domain": "greeting"
+  },
+  {
+    "id": "pb_0022",
+    "hindi_text": "धन्यवाद",
+    "santali_text": "ᱥᱟᱨᱦᱟᱣ",
+    "audio_file": "audio/pb_0022.ogg",
+    "domain": "greeting"
+  },
+  {
+    "id": "pb_0023",
+    "hindi_text": "हाजिरी लगाओ",
+    "santali_text": "ᱦᱟᱡᱤᱨᱤ ᱮᱢ ᱢᱮ",
+    "audio_file": "audio/pb_0023.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0024",
+    "hindi_text": "आज कौन अनुपस्थित है?",
+    "santali_text": "ᱛᱮᱦᱮᱧ ᱚᱠᱚᱭ ᱵᱟᱹᱱᱩᱜ-ᱮᱭᱟ?",
+    "audio_file": "audio/pb_0024.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0025",
+    "hindi_text": "हाथ ऊपर करो",
+    "santali_text": "ᱛᱤ ᱛᱩᱞ ᱢᱮ",
+    "audio_file": "audio/pb_0025.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0026",
+    "hindi_text": "सफाई रखो",
+    "santali_text": "ᱥᱟᱯᱷᱟ ᱛᱟᱦᱮᱸᱱ ᱢᱮ",
+    "audio_file": "audio/pb_0026.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0027",
+    "hindi_text": "लाइन में खड़े हो जाओ",
+    "santali_text": "ᱞᱟᱭᱤᱱ ᱨᱮ ᱵᱮᱨᱮᱫ ᱢᱮ",
+    "audio_file": "audio/pb_0027.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0028",
+    "hindi_text": "पानी पीने जा सकता हूं?",
+    "santali_text": "ᱪᱮᱫ ᱤᱧ ᱫᱟᱜ ᱧᱩᱧ ᱪᱟᱞᱟᱣ ᱫᱟᱲᱮᱭᱟᱜ-ᱟ?",
+    "audio_file": "audio/pb_0028.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0029",
+    "hindi_text": "कृपया मदद कीजिए",
+    "santali_text": "ᱫᱟ stage ᱛᱮ ᱜᱚᱲᱚ ᱤᱧ ᱢᱮ",
+    "audio_file": "audio/pb_0029.ogg",
+    "domain": "classroom"
+  },
+  {
+    "id": "pb_0030",
+    "hindi_text": "पेज नंबर दस निकालो",
+    "santali_text": "ᱯᱮᱡᱽ ᱱᱚᱢᱵᱚᱨ ᱜᱮᱞ ᱚᱰᱚᱠ ᱢᱮ",
+    "audio_file": "audio/pb_0030.ogg",
+    "domain": "classroom"
+  }
+]
