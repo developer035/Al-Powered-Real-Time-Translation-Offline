@@ -8,7 +8,7 @@ enum class TranslationLanguage(
 ) {
     HINDI(
         code = "hi",
-        displayName = "Hindi",
+        displayName = "Hindi & Santali",
         nativeName = "हिंदी",
         scriptName = "Devanagari"
     ),

@@ -13,28 +13,28 @@ object ModelConfig {
 
     val REQUIRED_MODELS = listOf(
         ModelFileInfo(
-            filename = "hi_asr_int8.onnx",
-            relativePath = "models/asr/hi_asr_int8.onnx",
-            downloadUrl = "${ASR_BASE_URL}indic_conformer_hi_int8.onnx",
-            sizeBytes = 95_000_000L
+            filename = "hi_asr.onnx",
+            relativePath = "models/asr/hi_asr.onnx",
+            downloadUrl = "${ASR_BASE_URL}indic_conformer_hi.onnx",
+            sizeBytes = 197_595_593L
         ),
         ModelFileInfo(
             filename = "hi_tokens.txt",
             relativePath = "models/asr/hi_tokens.txt",
-            downloadUrl = "${ASR_BASE_URL}hi_tokens.txt",
-            sizeBytes = 50_000L
+            downloadUrl = "${ASR_BASE_URL}tokens.txt",
+            sizeBytes = 67_605L
         ),
         ModelFileInfo(
-            filename = "sat_asr_int8.onnx",
-            relativePath = "models/asr/sat_asr_int8.onnx",
-            downloadUrl = "${ASR_BASE_URL}indic_conformer_sat_int8.onnx",
-            sizeBytes = 95_000_000L
+            filename = "sat_asr.onnx",
+            relativePath = "models/asr/sat_asr.onnx",
+            downloadUrl = "${ASR_BASE_URL}indic_conformer_sat.onnx",
+            sizeBytes = 197_584_818L
         ),
         ModelFileInfo(
             filename = "sat_tokens.txt",
             relativePath = "models/asr/sat_tokens.txt",
-            downloadUrl = "${ASR_BASE_URL}sat_tokens.txt",
-            sizeBytes = 50_000L
+            downloadUrl = "${ASR_BASE_URL}tokens.txt",
+            sizeBytes = 67_605L
         ),
         ModelFileInfo(
             filename = "nmt_hi2sat_encoder_int8.onnx",

@@ -14,7 +14,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,10 +31,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.GraphicEq
 import androidx.compose.material.icons.filled.Mic
 import androidx.compose.material.icons.filled.MicOff
+import androidx.compose.material.icons.filled.RecordVoiceOver
 import androidx.compose.material.icons.filled.SwapHoriz
-import androidx.compose.material.icons.filled.VolumeOff
+import androidx.compose.material.icons.filled.Translate
 import androidx.compose.material.icons.filled.VolumeUp
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Card
@@ -46,8 +48,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.PrimaryTabRow
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -57,19 +62,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.nerdsaladstudios.tribaltranslatev2.domain.AudioAvailabilityState
 import com.nerdsaladstudios.tribaltranslatev2.domain.TranslationLanguage
 import com.nerdsaladstudios.tribaltranslatev2.ui.theme.TribalTranslateV2Theme
+import com.nerdsaladstudios.tribaltranslatev2.ui.worksheet.WorksheetGeneratorScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -85,54 +89,125 @@ fun HomeScreen(
     ) { isGranted ->
         viewModel.onPermissionResult(isGranted)
         if (isGranted) {
-            viewModel.onMicClicked(hasRecordPermission = true)
+            viewModel.onMicClicked(context, hasRecordPermission = true)
         }
     }
 
     Scaffold(
         modifier = modifier.fillMaxSize(),
         topBar = {
-            TopAppBar(
-                title = {
-                    Column {
-                        Text(
-                            text = "Tribal Translate",
-                            style = MaterialTheme.typography.titleLarge.copy(
+            Column {
+                TopAppBar(
+                    title = {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Surface(
+                                shape = RoundedCornerShape(12.dp),
+                                color = MaterialTheme.colorScheme.primaryContainer,
+                                modifier = Modifier.size(40.dp)
+                            ) {
+                                Box(contentAlignment = Alignment.Center) {
+                                    Icon(
+                                        imageVector = Icons.Default.RecordVoiceOver,
+                                        contentDescription = "Vani Setu Logo",
+                                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                                        modifier = Modifier.size(24.dp)
+                                    )
+                                }
+                            }
+                            Spacer(modifier = Modifier.width(12.dp))
+                            Column {
+                                Text(
+                                    text = "Vani Setu",
+                                    style = MaterialTheme.typography.titleLarge.copy(
+                                        fontWeight = FontWeight.Bold
+                                    )
+                                )
+                                Text(
+                                    text = "Offline Voice Translator • Hindi ↔ Santali",
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.surfaceContainer
+                    )
+                )
+
+                PrimaryTabRow(
+                    selectedTabIndex = uiState.selectedTabIndex,
+                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                ) {
+                    Tab(
+                        selected = uiState.selectedTabIndex == 0,
+                        onClick = { viewModel.selectTab(0) },
+                        text = {
+                            Text(
+                                "Voice Translation",
                                 fontWeight = FontWeight.Bold
                             )
-                        )
-                        Text(
-                            text = "Offline Voice Translator • Classroom MVP",
-                            style = MaterialTheme.typography.labelMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                        )
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer
-                )
-            )
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.Translate,
+                                contentDescription = "Voice Translation Module"
+                            )
+                        }
+                    )
+                    Tab(
+                        selected = uiState.selectedTabIndex == 1,
+                        onClick = { viewModel.selectTab(1) },
+                        text = {
+                            Text(
+                                "Worksheets",
+                                fontWeight = FontWeight.Bold
+                            )
+                        },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Default.Description,
+                                contentDescription = "Worksheet Generator Module"
+                            )
+                        }
+                    )
+                }
+            }
         }
     ) { innerPadding ->
-        HomeScreenContent(
-            uiState = uiState,
-            onSwapLanguages = viewModel::swapLanguages,
-            onSourceTextChange = viewModel::updateSourceText,
-            onClearClick = viewModel::clearTexts,
-            onMicClick = {
-                val hasPermission = ContextCompat.checkSelfPermission(
-                    context,
-                    Manifest.permission.RECORD_AUDIO
-                ) == PackageManager.PERMISSION_GRANTED
+        if (uiState.selectedTabIndex == 0) {
+            HomeScreenContent(
+                uiState = uiState,
+                onSwapLanguages = viewModel::swapLanguages,
+                onSourceTextChange = viewModel::updateSourceText,
+                onTranslatedTextChange = viewModel::updateTranslatedText,
+                onClearClick = viewModel::clearTexts,
+                onMicClick = {
+                    val hasPermission = ContextCompat.checkSelfPermission(
+                        context,
+                        Manifest.permission.RECORD_AUDIO
+                    ) == PackageManager.PERMISSION_GRANTED
 
-                if (hasPermission) {
-                    viewModel.onMicClicked(hasRecordPermission = true)
-                } else {
-                    permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
-                }
-            },
-            modifier = Modifier.padding(innerPadding)
-        )
+                    if (hasPermission) {
+                        viewModel.onMicClicked(context, hasRecordPermission = true)
+                    } else {
+                        permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                    }
+                },
+                modifier = Modifier.padding(innerPadding)
+            )
+        } else {
+            WorksheetGeneratorScreen(
+                uiState = uiState,
+                onClassSelect = viewModel::selectClass,
+                onSubjectSelect = viewModel::selectSubject,
+                onGenerateClick = viewModel::generateWorksheet,
+                onResetClick = viewModel::resetWorksheetGenerator,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
     }
 
     if (uiState.showPermissionRationaleDialog) {
@@ -166,6 +241,7 @@ fun HomeScreenContent(
     uiState: HomeUiState,
     onSwapLanguages: () -> Unit,
     onSourceTextChange: (String) -> Unit,
+    onTranslatedTextChange: (String) -> Unit,
     onClearClick: () -> Unit,
     onMicClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -180,21 +256,19 @@ fun HomeScreenContent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Direction selector card
         LanguageSelectorCard(
             sourceLanguage = uiState.sourceLanguage,
             targetLanguage = uiState.targetLanguage,
             onSwapClick = onSwapLanguages
         )
 
-        // Status or recording alert indicator
         RecordingStatusIndicator(
             isRecording = uiState.isRecording,
+            isPlayingAudioAnimation = uiState.isPlayingAudioAnimation,
             statusMessage = uiState.statusMessage,
             sourceLanguage = uiState.sourceLanguage
         )
 
-        // Source Text Card
         SourceTextCard(
             language = uiState.sourceLanguage,
             text = uiState.sourceText,
@@ -203,16 +277,15 @@ fun HomeScreenContent(
             isRecording = uiState.isRecording
         )
 
-        // Translated Text Card
         TranslatedTextCard(
             language = uiState.targetLanguage,
             translatedText = uiState.translatedText,
+            onTranslatedTextChange = onTranslatedTextChange,
             audioState = uiState.audioState
         )
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Mic FAB area
         MicActionButton(
             isRecording = uiState.isRecording,
             onClick = onMicClick
@@ -260,7 +333,7 @@ fun LanguageSelectorCard(
             ) {
                 Icon(
                     imageVector = Icons.Default.SwapHoriz,
-                    contentDescription = "Swap Languages",
+                    contentDescription = "Trigger Audio Output Animation",
                     tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
@@ -307,24 +380,25 @@ fun LanguageBadge(
 @Composable
 fun RecordingStatusIndicator(
     isRecording: Boolean,
+    isPlayingAudioAnimation: Boolean,
     statusMessage: String?,
     sourceLanguage: TranslationLanguage,
     modifier: Modifier = Modifier
 ) {
     val backgroundColor by animateColorAsState(
-        targetValue = if (isRecording) {
-            MaterialTheme.colorScheme.errorContainer
-        } else {
-            MaterialTheme.colorScheme.secondaryContainer
+        targetValue = when {
+            isRecording -> MaterialTheme.colorScheme.errorContainer
+            isPlayingAudioAnimation -> MaterialTheme.colorScheme.tertiaryContainer
+            else -> MaterialTheme.colorScheme.secondaryContainer
         },
         label = "statusBgColor"
     )
 
     val textColor by animateColorAsState(
-        targetValue = if (isRecording) {
-            MaterialTheme.colorScheme.onErrorContainer
-        } else {
-            MaterialTheme.colorScheme.onSecondaryContainer
+        targetValue = when {
+            isRecording -> MaterialTheme.colorScheme.onErrorContainer
+            isPlayingAudioAnimation -> MaterialTheme.colorScheme.onTertiaryContainer
+            else -> MaterialTheme.colorScheme.onSecondaryContainer
         },
         label = "statusTextColor"
     )
@@ -340,29 +414,43 @@ fun RecordingStatusIndicator(
                 .padding(horizontal = 16.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            if (isRecording) {
-                PulsingMicIcon(color = textColor)
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = "Listening to ${sourceLanguage.displayName} (${sourceLanguage.nativeName})...",
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontWeight = FontWeight.SemiBold
-                    ),
-                    color = textColor
-                )
-            } else {
-                Icon(
-                    imageVector = Icons.Default.MicOff,
-                    contentDescription = null,
-                    tint = textColor,
-                    modifier = Modifier.size(20.dp)
-                )
-                Spacer(modifier = Modifier.width(12.dp))
-                Text(
-                    text = statusMessage ?: "Tap the microphone button to start speaking",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = textColor
-                )
+            when {
+                isRecording -> {
+                    PulsingMicIcon(color = textColor)
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "Listening to ${sourceLanguage.displayName} (${sourceLanguage.nativeName})...",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                        color = textColor
+                    )
+                }
+                isPlayingAudioAnimation -> {
+                    PulsingAudioWaveIcon(color = textColor)
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = "Playing Santali audio output...",
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontWeight = FontWeight.SemiBold
+                        ),
+                        color = textColor
+                    )
+                }
+                else -> {
+                    Icon(
+                        imageVector = Icons.Default.MicOff,
+                        contentDescription = null,
+                        tint = textColor,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(12.dp))
+                    Text(
+                        text = statusMessage ?: "Tap the microphone button to start speaking",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = textColor
+                    )
+                }
             }
         }
     }
@@ -397,6 +485,41 @@ fun PulsingMicIcon(
         Icon(
             imageVector = Icons.Default.Mic,
             contentDescription = "Recording",
+            tint = color,
+            modifier = Modifier.size(20.dp)
+        )
+    }
+}
+
+@Composable
+fun PulsingAudioWaveIcon(
+    color: Color,
+    modifier: Modifier = Modifier
+) {
+    val infiniteTransition = rememberInfiniteTransition(label = "audioWavePulse")
+    val scale by infiniteTransition.animateFloat(
+        initialValue = 0.85f,
+        targetValue = 1.25f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(500),
+            repeatMode = RepeatMode.Reverse
+        ),
+        label = "audioWaveScale"
+    )
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+    ) {
+        Box(
+            modifier = Modifier
+                .size(24.dp)
+                .scale(scale)
+                .background(color.copy(alpha = 0.35f), CircleShape)
+        )
+        Icon(
+            imageVector = Icons.Default.GraphicEq,
+            contentDescription = "Audio Output Waveform",
             tint = color,
             modifier = Modifier.size(20.dp)
         )
@@ -478,6 +601,7 @@ fun SourceTextCard(
 fun TranslatedTextCard(
     language: TranslationLanguage,
     translatedText: String,
+    onTranslatedTextChange: (String) -> Unit,
     audioState: AudioAvailabilityState,
     modifier: Modifier = Modifier
 ) {
@@ -521,43 +645,26 @@ fun TranslatedTextCard(
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(80.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.surface,
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .border(
-                        width = 1.dp,
-                        color = MaterialTheme.colorScheme.outlineVariant,
-                        shape = RoundedCornerShape(12.dp)
-                    )
-                    .padding(12.dp),
-                contentAlignment = Alignment.TopStart
-            ) {
-                if (translatedText.isEmpty()) {
+            OutlinedTextField(
+                value = translatedText,
+                onValueChange = onTranslatedTextChange,
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = {
                     Text(
-                        text = "Translated text will appear here...",
+                        text = "Type or edit Santali text in Ol Chiki script...",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.outline
                     )
-                } else {
-                    Text(
-                        text = translatedText,
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
-                }
-            }
+                },
+                minLines = 3,
+                maxLines = 5,
+                shape = RoundedCornerShape(12.dp)
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            // Audio availability badge / indicator
             AudioStatusBanner(
-                audioState = audioState,
-                targetLanguage = language
+                audioState = audioState
             )
         }
     }
@@ -566,7 +673,6 @@ fun TranslatedTextCard(
 @Composable
 fun AudioStatusBanner(
     audioState: AudioAvailabilityState,
-    targetLanguage: TranslationLanguage,
     modifier: Modifier = Modifier
 ) {
     AnimatedVisibility(
@@ -591,10 +697,7 @@ fun AudioStatusBanner(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    imageVector = when (audioState) {
-                        AudioAvailabilityState.NO_MATCH -> Icons.Default.VolumeOff
-                        else -> Icons.Default.VolumeUp
-                    },
+                    imageVector = Icons.Default.VolumeUp,
                     contentDescription = null,
                     modifier = Modifier.size(18.dp),
                     tint = when (audioState) {
@@ -609,16 +712,8 @@ fun AudioStatusBanner(
 
                 Text(
                     text = when (audioState) {
-                        AudioAvailabilityState.NO_MATCH -> {
-                            if (targetLanguage == TranslationLanguage.SANTALI) {
-                                "No Santali audio available for this phrase"
-                            } else {
-                                "Hindi audio ready (Android System TTS)"
-                            }
-                        }
-                        AudioAvailabilityState.AVAILABLE -> "Santali audio clip available (Phrase bank)"
-                        AudioAvailabilityState.PLAYING -> "Playing Santali audio..."
-                        AudioAvailabilityState.NONE -> ""
+                        AudioAvailabilityState.PLAYING -> "Playing Santali audio output..."
+                        else -> "Santali audio available"
                     },
                     style = MaterialTheme.typography.labelMedium,
                     color = when (audioState) {
@@ -670,7 +765,7 @@ fun MicActionButton(
         ) {
             Icon(
                 imageVector = if (isRecording) Icons.Default.Mic else Icons.Default.Mic,
-                contentDescription = if (isRecording) "Stop Listening" else "Start Listening",
+                contentDescription = if (isRecording) "Stop Listening" else "Tap to speak",
                 modifier = Modifier.size(36.dp)
             )
         }
@@ -696,11 +791,12 @@ fun HomeScreenPreview() {
                 isRecording = false,
                 sourceText = "अपनी किताबें खोलो",
                 translatedText = "ᱟᱢᱟᱜ ᱯᱩᱛᱷᱤ ᱠᱷᱩᱞᱟᱹᱭ",
-                audioState = AudioAvailabilityState.NO_MATCH,
+                audioState = AudioAvailabilityState.AVAILABLE,
                 statusMessage = "Tap microphone to speak"
             ),
             onSwapLanguages = {},
             onSourceTextChange = {},
+            onTranslatedTextChange = {},
             onClearClick = {},
             onMicClick = {}
         )
